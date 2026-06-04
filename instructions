@@ -13,6 +13,9 @@ cat filename
 Step 3: Setup (Local v Remote)
 If you are on an SSH server, copy the hash to your local machine (Parrot/Kali) since that is where your tools are installed.
 
+To downoad - scp USER@IP ADDRESS:"PATH" (YOUR DOWNLOADING PATH)
+
+
 Step 4: Create the hash file
 Create the file in your home directory to avoid path/permission issues. Using echo -n is important so you don't add a hidden newline character.
 
@@ -32,6 +35,7 @@ Auto-Detect: john hash.txt
 MD5: john --format=raw-md5 --wordlist=rockyou.txt hash.txt
 SHA-1: john --format=raw-sha1 --wordlist=rockyou.txt hash.txt
 MySQL5: john --format=mysql-sha1 --wordlist=rockyou.txt hash.txt
+SHA-256: john soh.txt --format=raw-sha256 --wordlist=/home/i5hubh4m/Pictures/ww.mnf
 
 View Results: If John says "No hashes left to crack," it's already solved. Use this to see it:
 
