@@ -1,0 +1,53 @@
+Step 1: Find the target file
+Use this to find the directory where the target file is stored while hiding permission errors.
+
+Bash
+find / -type f -name "filename" 2>/dev/null
+
+Step 2: Copy the Hash
+View the file and copy the hash string.
+
+Bash
+cat filename
+
+Step 3: Setup (Local v Remote)
+If you are on an SSH server, copy the hash to your local machine (Parrot/Kali) since that is where your tools are installed.
+
+Step 4: Create the hash file
+Create the file in your home directory to avoid path/permission issues. Using echo -n is important so you don't add a hidden newline character.
+
+Bash
+echo -n "hash_content_here" > hash.txt
+
+Step 5: Identify the Hash Type
+Run the hash through an identifier to find the format (MD5, SHA-1, MySQL5, etc).
+
+Bash
+hash-identifier
+
+Step 6: Cracking
+Choose the command based on the identified format:
+
+Auto-Detect: john hash.txt
+MD5: john --format=raw-md5 --wordlist=rockyou.txt hash.txt
+SHA-1: john --format=raw-sha1 --wordlist=rockyou.txt hash.txt
+MySQL5: john --format=mysql-sha1 --wordlist=rockyou.txt hash.txt
+
+View Results: If John says "No hashes left to crack," it's already solved. Use this to see it:
+
+Bash
+john --show hash.txt
+
+Wordlist Setup
+Wordlists are usually stored in /usr/share/wordlists/. You need to unzip them before use.
+
+Find the list:
+Bash
+ls -l /usr/share/wordlists/
+
+Unzip it:
+Bash
+cp /usr/share/wordlists/rockyou.txt.gz .
+gunzip rockyou.txt.gz
+
+                  END
